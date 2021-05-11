@@ -1,9 +1,7 @@
 package com.example.springdocker.service;
 
 import com.example.springdocker.model.Car;
-import com.example.springdocker.model.Food;
 import com.example.springdocker.repository.CarRepository;
-import com.example.springdocker.repository.FoodRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
