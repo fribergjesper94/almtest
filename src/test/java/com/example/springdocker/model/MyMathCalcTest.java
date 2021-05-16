@@ -38,7 +38,7 @@ class MyMathCalcTest {
 
     @Test
     @DisplayName("Throws an exception when trying to divide by zero")
-    // Java doesn't throw an exception if the divide method returns a double, it does if it returns an integer.
+    // Java doesn't throw an exception if the divide method returns a double or float, it does if it returns an integer.
     public void divideThrowsTest () {
         MyMathCalc myMathCalc = new MyMathCalc();
         assertThrows(ArithmeticException.class, () -> myMathCalc.divide(1,0));
