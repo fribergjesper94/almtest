@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Arrays;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -28,5 +29,15 @@ public class CarController {
     @GetMapping("/cars/drivable")
     public List<String> getDrivableCars() {
         return service.getDriveableCars();
+    }
+
+    @GetMapping("/addCar")
+    public List<Car> addCars() {
+        Car car = new Car();
+        car.setName("Volvo");
+        car.setCanIDriveIt(true);
+        car.setLooksGood(true);
+        service.saveNewCar(car);
+        return Arrays.asList(car);
     }
 }
