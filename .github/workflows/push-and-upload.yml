@@ -1,4 +1,4 @@
-name: Docker Push And Upload
+name: push-and-upload
 
 on:
   workflow_dispatch:
