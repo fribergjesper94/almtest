@@ -1,42 +1,39 @@
-name: Push and Upload
+name: Docker Push And Upload
 
 on:
-  workflow_dispatch
+  workflow_dispatch:
 
 jobs:
-  build-and-push:
+  push-and-upload:
 
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
-
       - name: Set up JDK 11
         uses: actions/setup-java@v2
         with:
           java-version: '11'
           distribution: 'adopt'
+      - name: Run Test
+        run: mvn clean install
 
       - name: Docker Hub Login
         uses: docker/login-action@v1
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Build and Push
+      - name: Build and push
         uses: docker/build-push-action@v2
         with:
           context: .
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/my-project:latest
-
-      - name: Build Jar
-        run: mvn clean install
+          tags: suntribe2020/my-project:${{ github.run_number }}
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v2
         with:
           name: app.jar
-          path: target/*.jar
-
+          path: target/*jar
